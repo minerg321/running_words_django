@@ -2,6 +2,8 @@ from django.views import View
 from django.http import HttpResponse
 from .utils import make_video
 from .models import VideoRequest
+from django.shortcuts import render
+
 
 def home(request):
     # здесь код для обработки главной страницы
