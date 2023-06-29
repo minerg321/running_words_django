@@ -6,7 +6,7 @@ from .models import VideoRequest
 
 def home(request):
     # здесь код для обработки главной страницы
-    return HttpResponse('It's Home....')
+    return HttpResponse('It is Home....')
 class MyView(View):
     def get(self, request, text):
         make_video(text)
