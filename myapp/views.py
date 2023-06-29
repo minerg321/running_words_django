@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from .utils import make_video
 from .models import VideoRequest
 
-
+def home(request):
+    # здесь код для обработки главной страницы
+    return render(request, 'home.html')
 class MyView(View):
     def get(self, request, text):
         make_video(text)
