@@ -8,6 +8,7 @@ def make_video(text):
   background = (0, 0, 0)
   text_color = (255, 255, 255)
   font_size = 24
+  fps = 30
 
   # Загружаем шрифт
   font = ImageFont.truetype("./Roboto-Regular.ttf", font_size)
@@ -17,11 +18,14 @@ def make_video(text):
   text_width, text_height = text_size[2] - text_size[0], text_size[3] - text_size[1]
   x, y = width, (height - text_height) // 2
 
+  # Рассчитываем скорость
+  speed = (text_width + width) / (3.0 * fps)
+
   # Создаем видео-писатель
   fourcc = cv2.VideoWriter_fourcc(*'mp4v') # или используйте 'XVID'
-  out = cv2.VideoWriter('output.mp4', fourcc, 30.0, (width, height))
+  out = cv2.VideoWriter('output.mp4', fourcc, fps, (width, height))
 
-  for _ in range(int(3 * 30)): # Длительность видео 3 секунды при 30 fps
+  for _ in range(int(3 * fps)): # Длительность видео 3 секунды при 30 fps
     # Создаем новый пустой кадр
     img = Image.new('RGB', (width, height), color=background)
     d = ImageDraw.Draw(img)
@@ -33,7 +37,7 @@ def make_video(text):
     frame = np.array(img)
 
     # Сдвигаем текст влево
-    x -= 5
+    x -= speed
     if x + text_width < 0:
       x = width
 
